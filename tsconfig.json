@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/utils/supabase/server.js", "src/app/dashboard/page.jsx", "src/app/(components)/addBlogButton/page.jsx", "src/app/(components)/card/page.jsx", "src/app/home/page.jsx", "src/app/home/action.js", "src/app/dashboard/action.js", "src/app/utils/supabase/client.js", "src/app/utils/supabase/middleware.js", "middleware.js", "src/app/(auth)/login/actions.js", "src/app/auth/confirm/route.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/utils/supabase/server.js", "src/app/(pages)/dashboard/page.jsx", "src/app/(components)/addBlogButton/page.jsx", "src/app/(components)/card/page.jsx", "src/app/(pages)/home/page.jsx", "src/app/(pages)/home/action.js", "src/app/(pages)/dashboard/action.js", "src/utils/supabase/client.js", "src/utils/supabase/middleware.js", "middleware.js", "src/app/(pages)/auth/login/actions.js", "src/app/api/auth/confirm/route.js"],
   "exclude": ["node_modules"]
 }

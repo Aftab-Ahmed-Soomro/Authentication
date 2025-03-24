@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { createServerSupabase } from '../../utils/supabase/server'
+import { createServerSupabase } from '../../../../utils/supabase/server'
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url)
@@ -8,7 +8,7 @@ export async function GET(request) {
   const next = searchParams.get('next') ?? '/'
 
   if (token_hash && type) {
-    const supabase = await createServerSupabase()
+    const supabase = createServerSupabase()
 
     const { error } = await supabase.auth.verifyOtp({
       type,

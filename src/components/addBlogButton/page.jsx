@@ -1,7 +1,7 @@
 "use client";
 
+import { addBlogs } from "@/services/blog";
 import { useState } from "react";
-import { addBlogs } from "./action"; // Ensure correct import
 
 export default function AddBlogButton({ onAddBlog }) {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import LogoutButton from "../(components)/logOutButton/page";
-import AddBlogButton from "../(components)/addBlogButton/page";
-import Card from "../(components)/card/page";
-import { getUserSession } from "./action";
-import { fetchUserBlogs } from "../home/action";
+import AddBlogButton from '@/components/addBlogButton/page'
+import Card from "@/components/card/page";
+import LogoutButton from "@/components/logOutButton/page";
+import { fetchUserBlogs, getUserSession } from "@/services/blog";
 
 export default function DashboardPage() {
   const [user, setUser] = useState(null);

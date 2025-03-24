@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchSingleBlog, updateBlog } from "@/app/dashboard/action";
+import { fetchSingleBlog, updateBlog } from "@/services/blog";
 import { useState, useEffect } from "react";
 
 export default function EditBlog({ blogId, onClose, onUpdate }) {
