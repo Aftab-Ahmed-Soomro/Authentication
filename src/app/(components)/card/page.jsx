@@ -1,23 +1,27 @@
-"use client";
+'use client'
 
-export default function Card({ title, description }) {
+import { useState } from "react";
+import EditBlog from '../editBlog/page'
+
+export default function Card({ id, title, description, onUpdate }) {
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
-    <div className="p-5 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-300">
-      {/* Title */}
-      <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
-
-      {/* Description */}
+    <div className="p-5 bg-white rounded-lg shadow-md">
+      <h2 className="text-lg font-semibold">{title}</h2>
       <p className="text-gray-700 mt-2 text-sm">{description}</p>
-
-      {/* Action Buttons */}
       <div className="mt-4 flex justify-end gap-3">
-        <button className="px-3 py-1.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition duration-200">
+        <button 
+          onClick={() => setIsEditing(true)} 
+          className="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">
           Edit
         </button>
-        <button className="px-3 py-1.5 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition duration-200">
+        <button className="px-3 py-1 text-sm text-white bg-red-500 rounded-md hover:bg-red-600">
           Delete
         </button>
       </div>
+
+      {isEditing && <EditBlog blogId={id} onClose={() => setIsEditing(false)} onUpdate={onUpdate} />}
     </div>
   );
 }

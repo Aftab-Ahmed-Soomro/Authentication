@@ -67,7 +67,13 @@ export default function DashboardPage() {
         {blogs.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {blogs.map((blog, index) => (
-              <Card key={index} title={blog.title} description={blog.description} />
+              <Card 
+                key={index} 
+                id={blog.id} 
+                title={blog.title} 
+                description={blog.description} 
+                onUpdate={() => fetchBlogs(user.id)} 
+              />
             ))}
           </div>
         ) : (
