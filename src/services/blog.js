@@ -111,3 +111,19 @@ export async function updateBlog(blogId, updatedTitle, updatedDescription) {
 
   return { data, error: null };
 }
+
+export async function deleteBlog(blogId) {
+  const supabase = createServerSupabase();
+
+  const { error } = await supabase
+    .from("blogs")
+    .delete()
+    .eq("id", blogId);
+
+  if (error) {
+    console.error("Error deleting blog:", error);
+    return { error: "Could not delete blog" };
+  }
+
+  return { success: true };
+}

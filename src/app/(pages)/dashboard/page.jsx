@@ -34,6 +34,10 @@ export default function DashboardPage() {
     setBlogs((prev) => [...prev, newBlog]);
   };
 
+  const handleDeleteBlog = (deletedBlogId) => {
+    setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog.id !== deletedBlogId));
+  };  
+
   if (!user) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -71,7 +75,10 @@ export default function DashboardPage() {
                 id={blog.id} 
                 title={blog.title} 
                 description={blog.description} 
-                onUpdate={() => fetchBlogs(user.id)} 
+                onUpdate={() => {
+                  fetchBlogs(user.id);
+                  handleDeleteBlog(blog.id); // Remove from state after delete
+                }} 
               />
             ))}
           </div>

@@ -2,9 +2,21 @@
 
 import { useState } from "react";
 import EditBlog from '../editBlog/page'
+import { deleteBlog } from "@/services/blog";
 
 export default function Card({ id, title, description, onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
+
+  const handleDelete = async () => {
+    if (!confirm("Are you sure you want to delete this blog?")) return;
+
+    const response = await deleteBlog(id);
+    if (response.success) {
+      onUpdate(); // Refresh the list after deletion
+    } else {
+      console.error("Failed to delete blog");
+    }
+  };
 
   return (
     <div className="p-5 bg-white rounded-lg shadow-md">
@@ -16,7 +28,7 @@ export default function Card({ id, title, description, onUpdate }) {
           className="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">
           Edit
         </button>
-        <button className="px-3 py-1 text-sm text-white bg-red-500 rounded-md hover:bg-red-600">
+        <button onClick={handleDelete} className="px-3 py-1 text-sm text-white bg-red-500 rounded-md hover:bg-red-600">
           Delete
         </button>
       </div>
