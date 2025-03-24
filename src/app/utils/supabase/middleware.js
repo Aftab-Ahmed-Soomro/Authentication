@@ -1,21 +1,21 @@
 import { createServerClient } from '@supabase/ssr'
-import { NextResponse, type NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
-export async function updateSession(request: NextRequest) {
+export async function updateSession(request) {
   let supabaseResponse = NextResponse.next({
     request,
   })
 
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
         getAll() {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
+          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
           supabaseResponse = NextResponse.next({
             request,
           })
@@ -38,12 +38,8 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   if (
-    // in routes ke ilawa saare protected hain when user is not there
     !user &&
-    !request.nextUrl.pathname.includes('/login') &&
-    !request.nextUrl.pathname.includes('/register') &&
-    !request.nextUrl.pathname.includes('/forgot-password') &&
-    !request.nextUrl.pathname.includes('/reset-password') &&
+    !request.nextUrl.pathname.startsWith('/login') &&
     !request.nextUrl.pathname.startsWith('/auth')
   ) {
     // no user, potentially respond by redirecting the user to the login page
